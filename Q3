@@ -1,0 +1,20 @@
+# 题目3: 大数加法
+def add(x, y):  # 读入两个正整数
+    result = ''
+    counter, c = 0, 0
+    a, b = x if len(x) > len(y) else y, y if len(x) > len(y) else x  # a大b小
+    b = (len(a) - len(b)) * '0' + b  # 使位数保持一致在小的数前面加0
+    for i in range(len(a) - 1, -1, -1):
+        s = int(a[i]) + int(b[i]) + counter
+        if s > 9:  # 有进位
+            c = 1  # 临时进位变量
+            s %= 10
+        result += str(s)
+        counter = c  # 让下次循环（高位）进位
+        c = 0
+    if counter == 1:
+        result += '1'
+    return result[::-1]  # 高低位反转
+
+x = add('5445', '5555')  # 测试
+print(x)
